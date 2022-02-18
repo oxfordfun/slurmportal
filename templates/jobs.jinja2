@@ -1,0 +1,46 @@
+{% extends 'base.jinja2' %}
+
+{% block style %}
+  .truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+{% endblock %}
+
+{% block content %}
+  <header class="w3-container w3-deep-orange">
+    <h2>My Jobs</h2>
+  </header>
+
+  <div class="w3-container w3-panel w3-white">
+    <p>
+      <table class="w3-table">
+    <thead>
+      <th>Job ID</th>
+      <th>Start time</th>
+      <th>Status</th>
+      <th>Nodes</th>
+      <th>Job Detail</th>
+    </thead>
+    <tbody>
+      {% for job_id, detail in jobs.items() %}
+        <tr>
+          <td>{{ job_id }}</td>
+          <td>
+            {% if detail['job_state'] != 'PENDING' %}
+              {{ nice_time(detail['start_time']) }}
+            {% endif %}
+          </td>
+          <td>{{ detail['job_state'] }}</td>
+          <td>{{ detail['nodes']}}</td>
+          <td><pre>{{ detail }}</pre></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+      </table>
+    </p>
+  </div>
+
+{% endblock %}
