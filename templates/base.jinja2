@@ -21,7 +21,15 @@
 
   <body class="w3-light-gray">
 
-    <header class="w3-container w3-black w3-bar"><span class="w3-bar-item w3-large w3-right">Slurm Portal</span></header>
+    <header class="w3-container w3-black w3-bar">
+
+      <table>
+        <th><h1>Slurm Portal</h1></th>
+        <th></th>
+        <th><a href="/jobs"><h3>My Jobs</h3></a></th>
+        <th><a href="/submit"><h3>Submit</h3></a></th>
+      </table
+    </header>
 
     {% block content %}
     {% endblock %}

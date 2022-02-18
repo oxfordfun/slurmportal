@@ -29,6 +29,15 @@ def jobs():
     )
 
 
+@app.route("/cancel/<job_id>")
+def cancel(job_id):
+    try:
+        pyslurm.slurm_kill_job(int(job_id), 9, 1)
+    except:
+        pass
+    return flask.redirect("/jobs")
+
+
 @app.route("/submit", methods=["GET", "POST"])
 def submit():
     if flask.request.method == "GET":
