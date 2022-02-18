@@ -1,0 +1,31 @@
+{% extends 'base.jinja2' %}
+
+{% block style %}
+  .truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+{% endblock %}
+
+{% block content %}
+  <header class="w3-container w3-deep-orange">
+    <h2>Submit a job</h2>
+  </header>
+
+  <div class="w3-container w3-pale-green w3-panel">
+
+    <form method="POST">
+      <p>
+        <label>Job name</label>
+        <input class="w3-input" type="text" name="job_name"/>
+        <label>Job command</label>
+<textarea rows=10 class="w3-input" type="textarea" name="job_command"></textarea>
+      </p>
+
+        <button class="w3-input w3-blue" type="Submit" name="Submit" value="Submit_Job" value="Submit">Submit</button>
+    </form>
+    </div>
+
+{% endblock %}

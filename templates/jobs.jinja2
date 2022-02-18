@@ -22,6 +22,7 @@
       <th>Start time</th>
       <th>Status</th>
       <th>Nodes</th>
+      <th>Job name</th>
       <th>Job Detail</th>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@
           </td>
           <td>{{ detail['job_state'] }}</td>
           <td>{{ detail['nodes']}}</td>
+          <td>{{ detail['name'] }}</td>
           <td><pre>{{ detail }}</pre></td>
         </tr>
       {% endfor %}

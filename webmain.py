@@ -29,11 +29,19 @@ def jobs():
     )
 
 
-@app.route("/nodes")
-def nodes():
-    jobs = pyslurm.job().get()
-    formatted = json.dumps(jobs, indent=4, sort_keys=True)
-    return f"<pre>{formatted}</pre>"
+@app.route("/submit", methods=["GET", "POST"])
+def submit():
+    if flask.request.method == "GET":
+        return flask.render_template("submit.jinja2", title="Submit a Job")
+    if flask.request.method == "POST":
+        job_name = flask.request.form.get("job_name")
+        job_command = flask.request.form.get("job_command")
+        job = {}
+        job["wrap"] = job_command
+        job["job_name"] = job_name
+        test_job_id = pyslurm.job().submit_batch_job(job)
+
+        return flask.redirect("/jobs")
 
 
 def main(debug=False):
