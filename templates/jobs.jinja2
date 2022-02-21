@@ -11,24 +11,23 @@
 
 {% block content %}
   <header class="w3-container w3-deep-orange">
-    <h3>My Jobs</h3>
+    <h3>Jobs</h3>
   </header>
 
   <div class="w3-container w3-panel w3-white">
     <p>
       <table class="w3-table">
     <thead>
-      <th>Job ID</th>
+      <th>ID</th>
       <th>Start time</th>
       <th>Status</th>
       <th>Nodes</th>
       <th>Name</th>
-      <th>User ID</th>
+      <th>User</th>
       <th>Output</th>
       <th>Error</th>
       <th>Tasks/Nodes</th>
       <th>Action</th>
-      <th>Detail</th>
     </thead>
     <tbody>
       {% for job_id, detail in jobs.items() %}
@@ -46,8 +45,10 @@
           <td>{{ detail['std_out'] }}</td>
           <td>{{ detail['std_err'] }}</td>
           <td>{{ detail['num_tasks']}}/{{ detail['num_nodes'] }}</td>
-          <td><a href="/cancel/{{ job_id2 }}">Cancel</a></td>
-          <td><pre>{{ detail }}</pre></td>
+          <td>
+            <a href="/cancel/{{ job_id }}">Cancel</a> |
+            <a href="/detail/{{ job_id }}">View Detail</a>
+          </td>
         </tr>
       {% endfor %}
     </tbody>

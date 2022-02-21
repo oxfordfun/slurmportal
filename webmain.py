@@ -8,6 +8,11 @@ import pyslurm
 import humanize
 
 
+def nice_time(t2):
+    time_now = time.time()
+    return humanize.naturaltime(dt.timedelta(seconds=(time_now - t2))).capitalize()
+
+
 app = flask.Flask(__name__)
 
 
@@ -16,13 +21,13 @@ def root():
     return "Hello"
 
 
-@app.route("/jobs")
-def jobs():
+@app.route("/resources")
+def resources():
     time_now = time.time()
 
-    def nice_time(t2):
-        return humanize.naturaltime(dt.timedelta(seconds=(time_now - t2))).capitalize()
 
+@app.route("/jobs")
+def jobs():
     jobs = pyslurm.job().get()
     return flask.render_template(
         "jobs.jinja2", title="Slurm Jobs", jobs=jobs, nice_time=nice_time
@@ -36,6 +41,16 @@ def cancel(job_id):
     except:
         pass
     return flask.redirect("/jobs")
+
+
+@app.route("/detail/<job_id>")
+def detail(job_id):
+    pyslurmjob = pyslurm.job()
+    jobs = pyslurmjob.get()
+    detail = jobs[int(job_id)]
+    return flask.render_template(
+        "job.jinja2", title="Job Detail", job=detail, job_id=job_id
+    )
 
 
 @app.route("/submit", methods=["GET", "POST"])
