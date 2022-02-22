@@ -34,6 +34,12 @@ def jobs():
     )
 
 
+@app.route("/nodes")
+def nodes():
+    nodes = pyslurm.node().get()
+    return flask.render_template("nodes.jinja2", title="Nodes", nodes=nodes)
+
+
 @app.route("/cancel/<job_id>")
 def cancel(job_id):
     try:

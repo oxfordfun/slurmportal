@@ -1,0 +1,48 @@
+{% extends 'base.jinja2' %}
+
+{% block style %}
+  .truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+{% endblock %}
+
+{% block content %}
+  <header class="w3-container w3-deep-orange">
+    <h3>Nodes ({{ nodes | length }})</h3>
+  </header>
+
+  <div class="w3-container w3-panel w3-white">
+    <p>
+      <table class="w3-table">
+    <thead>
+      <th>Name</th>
+      <th>Addr</th>
+      <th>Cpus</th>
+      <th>Cpus-Allo.</th>
+      <th>Memory</th>
+      <th>Memory-Allo.</th>
+      <th>State</th>
+      <th>OS</th>
+    </thead>
+    <tbody>
+      {% for nodename, detail in nodes.items() %}
+        <tr>
+          <td>{{ nodename }}</td>
+          <td>{{ detail['node_addr'] }}</td>
+          <td>{{ detail['cpus'] }}</td>
+          <td>{{ detail['alloc_cpus'] }}</td>
+          <td>{{ detail['real_memory'] }}</td>
+          <td>{{ detail['alloc_mem']}} </td>
+          <td>{{ detail['state'] }} </td>
+          <td>{{ detail['os'] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+      </table>
+    </p>
+  </div>
+
+{% endblock %}
