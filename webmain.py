@@ -66,9 +66,13 @@ def submit():
     if flask.request.method == "POST":
         job_name = flask.request.form.get("job_name")
         job_command = flask.request.form.get("job_command")
+        job_output = flask.request.form.get("output")
+        job_error = flask.request.form.get("error")
         job = {}
         job["wrap"] = job_command
         job["job_name"] = job_name
+        job["output"] = job_output
+        job["error"] = job_error
         test_job_id = pyslurm.job().submit_batch_job(job)
 
         return flask.redirect("/jobs")

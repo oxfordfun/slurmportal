@@ -19,9 +19,13 @@
     <form method="POST">
       <p>
         <label>Job name</label>
-        <input class="w3-input" type="text" name="job_name"/>
+        <input class="w3-input" type="text" name="job_name" value="myjob"/>
+        <label>Output file</label>
+        <input class="w3-input" type="text" value="slurmjob-%j.out" name="output"/>
+        <label>Error file</label>
+        <input class="w3-input" type="text" value="slurmjob-%j.err" name="error"/>
         <label>Job command</label>
-<textarea rows=10 class="w3-input" type="textarea" name="job_command"></textarea>
+<textarea rows=10 class="w3-input" type="textarea" name="job_command">srun echo $HOSTNAME; sleep 60</textarea>
       </p>
 
         <button class="w3-input w3-blue" type="Submit" name="Submit" value="Submit_Job" value="Submit">Submit</button>
